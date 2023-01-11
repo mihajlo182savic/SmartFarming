@@ -1,0 +1,400 @@
+<html>
+
+<head>
+<meta http-equiv="refresh" content="2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+.Button {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #44c767), color-stop(1, #5cbf2a));
+	background:-moz-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-webkit-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-o-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-ms-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#5cbf2a',GradientType=0);
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	top:20%;
+	position:absolute;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+		width:200;
+}
+.Button:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cbf2a), color-stop(1, #44c767));
+	background:-moz-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+	background:-webkit-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+	background:-o-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+	background:-ms-linear-gradient(top, #5cbf2a 5%, #44c767 100%);
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cbf2a', endColorstr='#44c767',GradientType=0);
+	background-color:#5cbf2a;
+}
+.Button:active {
+	position:relative;
+	top:1px;
+}
+.Button1 {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #44c767), color-stop(1, #5cbf2a));
+	background:-moz-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-webkit-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-o-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-ms-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#5cbf2a',GradientType=0);
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	top:50%;
+	position:absolute;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+		width:200;
+}
+.Button11 {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #44c767), color-stop(1, #5cbf2a));
+	background:-moz-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-webkit-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-o-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-ms-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#5cbf2a',GradientType=0);
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	top:20%;
+	position:absolute;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+		width:200;
+}
+.Button2 {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #44c767), color-stop(1, #5cbf2a));
+	background:-moz-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-webkit-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-o-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:-ms-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#5cbf2a',GradientType=0);
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+		position:absolute;
+	top:80%;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+		width:200;
+}
+.Button6 {
+	background-color:#c74545;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #ab1919;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #662828;
+		position:absolute;
+	top:30%;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+	width:200;
+}
+.Button7 {
+	background-color:#c74545;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #ab1919;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #662828;
+		position:absolute;
+	top:60%;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+		width:200;
+}
+.Button8 {
+	background-color:#c74545;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #ab1919;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #662828;
+		position:absolute;
+	top:90%;
+	left:0%;
+	right:0%;
+	margin-left:auto;
+	margin-right:auto;
+		width:200;
+}
+.tabela{
+position: absolute;
+top: 25%;
+left: 25%;
+height: 50%;
+width: 50%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th{
+background-color: white;
+align: middle;
+}
+
+td{
+padding-left: 25%;
+}
+.nazad{
+	position: absolute;
+	left: 2%;
+	top: 2%;
+	width: 205;
+	height: 50;
+    text-align: center;
+}
+
+.prostor{
+
+	background-color: white;
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	left: 25%;
+	top: 25%;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.60), 0 5px 5px 0 rgba(0, 0, 0, 0.40);
+}
+body{
+	background-color: #c6c6d1;
+}
+
+.meni{
+background-color: #b3b3bc;
+
+}
+.Button4 {
+	-moz-box-shadow: 0px 0px 0px 2px #bd1c1c;
+	-webkit-box-shadow: 0px 0px 0px 2px #bd1c1c;
+	box-shadow: 0px 0px 0px 2px #bd1c1c;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c73737), color-stop(1, #bf3434));
+	background:-moz-linear-gradient(top, #c73737 5%, #bf3434 100%);
+	background:-webkit-linear-gradient(top, #c73737 5%, #bf3434 100%);
+	background:-o-linear-gradient(top, #c73737 5%, #bf3434 100%);
+	background:-ms-linear-gradient(top, #c73737 5%, #bf3434 100%);
+	background:linear-gradient(to bottom, #c73737 5%, #bf3434 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c73737', endColorstr='#bf3434',GradientType=0);
+	background-color:#c73737;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #732525;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bf3434), color-stop(1, #c73737));
+	background:-moz-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:-webkit-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:-o-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:-ms-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:linear-gradient(to bottom, #bf3434 5%, #c73737 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf3434', endColorstr='#c73737',GradientType=0);
+	background-color:#bf3434;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.Button4:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bf3434), color-stop(1, #c73737));
+	background:-moz-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:-webkit-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:-o-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:-ms-linear-gradient(top, #bf3434 5%, #c73737 100%);
+	background:linear-gradient(to bottom, #bf3434 5%, #c73737 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf3434', endColorstr='#c73737',GradientType=0);
+	background-color:#bf3434;
+}
+.Button4:active {
+	position:relative;
+	top:1px;
+}
+
+.myButton:hover {
+	background-color:#eb675e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.dugme1{
+	
+	width: 260;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    text-align: center;
+}
+
+.dugme2{
+	
+	width: 260;
+    position: absolute;
+   left: 42%;
+    top: 50%;
+    text-align: center;
+}
+
+.dugme3{
+	
+	width: 260;
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    text-align: center;
+}
+.dugme4{
+	
+	width: 260;
+    position: absolute;
+    left: 10%;
+    top: 85%;
+    text-align: center;
+}
+
+.nazad{
+	float: left;
+	width: 205;
+	height: 50;
+    text-align: center;
+}
+
+
+
+.linija{
+background-color: #b3b3bc;
+width: 100%;
+height: 110;
+bottom: 10;
+}
+.sred{
+background-color:green;
+width:100%;
+height:100%;
+position:relative;
+}
+</style>
+<body>
+<div class="linija">
+	<div class="meni">
+		<div class="nazad" alt="">
+			<a href="/"><button class="Button4" style="vertical-align:middle" >Nazad</button></a>
+		</div>
+	</div>
+</div>
+<div  class="tabela1">
+<table style="width:100%">
+
+  <tr>
+	<th>Temperatura: {{temperatura}} C</th>
+	<th>Vlaznost: {{vlaznost}}%</th>
+  </tr>
+</table>
+</div>
+</div>
+
+<div class="sred">
+<form action="/ventilator"><button class="Button"> Upali ventilator</button></form>
+<form action="/ventilatorugasi"><button class="Button6"> Ugasi ventilator</button></form>
+<form action="/pumpa"><button class="Button1">Upali pumpu</button></form>
+<form action="/pumpaugasi"><button class="Button7"> Ugasi pumpu</button></form>
+<form action="/sijalica"><button class="Button2">Upali sijalicu</button></form>
+<form action="/sijalicaugasi"><button class="Button8"> Ugasi sijalicu</button></form>
+</div>
+
+</body>
+</html>

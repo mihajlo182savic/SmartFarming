@@ -1,0 +1,98 @@
+
+<html>
+<head>
+<title>
+Merenje
+</title>
+</head>
+<body>
+<div class="nazad" alt="">
+		<a href="/"><button class="button1" style="vertical-align:middle">Nazad</button></a>
+</div>
+<div class="prostor">
+		
+<div class="tabela">
+<p>OBAVESTENJE: {{stanje}}<br><br><br></p>
+<table style="width:100%">
+  <tr>
+	<th>Godina: {{godina}}</th>
+	<th>Mesec: {{mesec}}</th>
+	<th>Dan: {{dan}} </th>
+	<th>Sat: {{sat}}h</th>
+	<th>Minut: {{minut}}m </th>
+	<th>Sekund: {{sekund}}s</th>
+  </tr>
+ 
+</table>
+<form action="/pumpa1"><button class="button" style="vertical-align:middle"><span>Pokrenuti pumpu<br> </br></span></button></form>
+
+</div>
+<style>
+.button1{
+border-style: solid;
+	border-color: #057B03;
+ display: inline-block;
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  height: 60;
+  width: 200;
+  text-align: center;
+  font-size: 25px;
+  padding: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button1:hover{
+background-color:#43A047;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th{
+background-color: #4CAF50;
+align: middle;
+}
+
+td{
+padding-left: 25%;
+}
+.nazad{
+	position: absolute;
+	left: 2%;
+	top: 2%;
+	width: 205;
+	height: 50;
+    text-align: center;
+}
+
+.tabela{
+position: absolute;
+top: 25%;
+left: 25%;
+height: 50%;
+width: 50%;
+}
+.prostor{
+
+	background-color: white;
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	left: 25%;
+	top: 25%;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.60), 0 5px 5px 0 rgba(0, 0, 0, 0.40);
+}
+body{
+	background-color: #545454;
+	position: relative;
+}
+</style>
+
+
+
+
+

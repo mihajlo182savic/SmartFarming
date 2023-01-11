@@ -1,0 +1,320 @@
+from __future__ import division
+import Adafruit_PCA9685
+import RPi.GPIO as GPIO
+import time as t
+import Adafruit_CharLCD as LCD
+import sys
+import sys, errno
+import datetime
+import Adafruit_DHT
+from flask import Flask
+from flask import Flask, flash, redirect, render_template, request, session, abort,url_for
+import os
+
+channel = 24
+p=0
+pu=0
+p1=0
+sp='ugasena'
+vrednosti='Unesite vrednost,zatim izaberite mod!'
+stanje=''
+pump=0
+brojac=0
+i=0
+s='ugasen'
+kapija = "zatvoreno"
+garaza = "zatvoreno"
+prvi = "ugaseno"
+drugi = "ugaseno"
+treci = "ugaseno"
+cetvrti = "ugaseno"
+ocitanatempmax=0
+ocitanavlazmax=0
+ocitanatempmin=0
+godina=''
+mesec=''
+linija=''
+dan=''
+sat=''
+auto=0
+minut=''
+sekund=''
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(channel, GPIO.IN)
+GPIO.setwarnings(False)
+GPIO.setup(18,GPIO.OUT)
+GPIO.setup(19,GPIO.OUT)
+GPIO.setup(21,GPIO.OUT)
+
+lcd_rs = 12
+lcd_en = 13
+lcd_d4 = 23
+lcd_d5 = 17
+lcd_d6 = 26
+lcd_d7 = 22
+#lcd_backlight = 2
+
+lcd_columns = 16
+lcd_rows = 2
+
+lcd = LCD.Adafruit_CharLCD(lcd_rs,lcd_en,lcd_d4,lcd_d5,lcd_d6,lcd_d7,lcd_columns,lcd_rows)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+led1=5
+led2=16
+led3=20
+led4=5
+GPIO.setup(led1, GPIO.OUT)
+GPIO.output(led1, 0)
+GPIO.setup(led2, GPIO.OUT)
+GPIO.output(led2, 0)
+GPIO.setup(led3, GPIO.OUT)
+GPIO.output(led3, 0)
+GPIO.setup(led4, GPIO.OUT)
+GPIO.output(led4, 0)
+
+app = Flask(__name__)
+pwm = Adafruit_PCA9685.PCA9685()
+pwm.set_pwm_freq(60)
+lcd.clear()
+lcd.message("L1:OFF    L2:OFF\nL3:OFF    L4:OFF")
+
+class Dioda(object):
+	def upali787():
+			vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+app = Flask(__name__)
+
+
+dioda=Dioda()
+@app.route('/')
+def home():
+  if not session.get('logged_in'):
+   return render_template('login.html')
+  else:
+	global auto
+	auto=0
+	print ("%d" %(auto))
+	return render_template('pocetna.html',ocitanatempmin=ocitanatempmin,ocitanatempmax=ocitanatempmax,ocitanavlazmax=ocitanavlazmax)
+
+@app.route('/kuca')
+def prebacinakucu():
+	return render_template ('pametnakuca.html')
+
+@app.route('/plastenik')
+def prebacinaplastenik():
+	return render_template ('indexnovi.html')
+
+#AUTOMATSKO
+@app.route('/hello', methods=['GET', 'POST'])
+def hello():
+	global ocitanatempmin,ocitanavlazmin,vrednosti,ocitanatempmax,ocitanavlazmax
+	ocitanatempmin = int(request.form['first_name1'])
+	ocitanatempmax= int(request.form['first_name'])
+	ocitanavlazmax = int(request.form['last_name'])
+	vrednosti='Uneli ste vrednost! Izaberite mod'
+	return render_template('indexnovi.html',ocitanatempmin=ocitanatempmin,vrednosti=vrednosti,ocitanatempmax=ocitanatempmax,ocitanavlazmax=ocitanavlazmax)
+
+
+@app.route('/automatsko')
+def kreni():
+		global ocitanatempmin,ocitanatempmax,ocitanavlazmax
+		vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+		print 'Temperatura: {0:0.1f} C  Vlaznost: {1:0.1f} %'.format(temperatura, vlaznost)
+		if (vlaznost>=ocitanavlazmax)or(temperatura>=ocitanatempmax)or(temperatura<=ocitanatempmin):
+			if vlaznost>=ocitanavlazmax:
+				print '1'
+				GPIO.output(18,1)
+				ispis=('Vlaznost je bila preko %s posto, ventilator se vrteo 5 sekundi!'%(ocitanavlazmax))
+			if temperatura>=int(ocitanatempmax):
+				print '2'
+				GPIO.output(18,1)
+				ispis=('Temperatura je bila preko %s C, ventilator se vrteo 5 sekundi!'%(ocitanatempmax))
+			if temperatura<int(ocitanatempmin):
+				GPIO.output(21,1)
+				print ocitanatempmin
+				ispis=('Temperatura je bila ispod %s C, sijalica je radila 5 sekundi!'%(ocitanatempmin))
+		else:
+			ispis='Temperatura i vlaznost su stabilni. Nema novih obavestenja'
+		global godina,mesec,dan,sat,minut,sekund
+		global stanje
+		global brojac
+		if GPIO.input(channel):
+			stanje='Zemljiste je bilo suvo, pumpa je bila upaljena 5 sekundi! Pumpa je poslednji put pokrenuta:'
+			GPIO.output(19,1)
+			brojac=brojac+1
+			now = datetime.datetime.now()
+			godina=now.year
+			mesec=now.month
+			dan=now.day
+			sat=now.hour
+			minut=now.minute
+			sekund=now.second
+			f = open('citanje.txt', 'a')
+    			f.write('%s %s %s %s %s %s \n' % (godina,mesec ,dan ,sat ,minut ,sekund))
+			f.close()
+		else:
+			stanje='Zemljiste je vlazno, pumpa se nije pokrenula! Pumpa je poslednji put pokrenuta:'
+			if brojac==0:
+				f=open('citanje.txt','r')
+				linija = f.readlines()
+				stanje=('Zemljiste je vlazno,pumpa se nije pokrenula! Pumpa poslednji put pokrenuta\n %s'%(linija[-1]))
+		t.sleep(5)
+		GPIO.output(18,0)
+		GPIO.output(19,0)
+		GPIO.output(21,0)
+		return render_template('indexautomatsko.html',vlaznost=vlaznost,temperatura=temperatura,ispis=ispis,stanje=stanje,godina=godina,mesec=mesec,dan=dan,sat=sat,minut=minut,sekund=sekund)
+#RUCNO		
+@app.route('/akcijanova')
+def kreni12():
+	global vlaznost,temperatura
+	vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+	print 'Temperatura: {0:0.1f} C  Vlaznost: {1:0.1f} %'.format(temperatura, vlaznost)
+	return render_template ('index.html',vlaznost=vlaznost,temperatura=temperatura)
+
+@app.route('/ventilator')
+def upali():
+	global vlaznost,temperatura
+	GPIO.output(18,1)
+	vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+	return render_template('index.html',vlaznost=vlaznost,temperatura=temperatura)
+@app.route('/ventilatorugasi')
+def upali17():
+	global vlaznost,temperatura
+	GPIO.output(18,0)
+	vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+	return render_template('index.html',vlaznost=vlaznost,temperatura=temperatura)
+
+@app.route('/pumpa')
+def upali1():
+	global vlaznost,temperatura
+	GPIO.output(19,1)
+	dioda.upali787
+	print 'Temperatura: {0:0.1f} C  Vlaznost: {1:0.1f} %'.format(temperatura, vlaznost)
+	print 'ISPIS'
+	return render_template('index.html',vlaznost=vlaznost,temperatura=temperatura)
+
+@app.route('/pumpaugasi')
+def upali13():
+	global vlaznost,temperatura
+	GPIO.output(19,0)
+	dioda.upali787
+	print 'Temperatura: {0:0.1f} C  Vlaznost: {1:0.1f} %'.format(temperatura, vlaznost)
+	print'UGASIJO'
+	return render_template('index.html',vlaznost=vlaznost,temperatura=temperatura)
+@app.route('/sijalica')
+def upali111():
+	global vlaznost,temperatura
+	GPIO.output(21,1)
+	vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+	print 'ISPISSIJALICA'
+	return render_template('index.html',vlaznost=vlaznost,temperatura=temperatura)
+
+@app.route('/sijalicaugasi')
+def upali1333():
+	global vlaznost,temperatura
+	GPIO.output(21,0)
+	vlaznost, temperatura = Adafruit_DHT.read_retry(11, 4)
+	print'UGASIJOSIJALICU'
+	return render_template('index.html',vlaznost=vlaznost,temperatura=temperatura)
+
+@app.route('/login', methods=['POST'])
+def do_admin_login():
+	if request.form['password'] == '2' and request.form['username'] == '1':
+		session['logged_in'] = True
+	else:
+		flash('wrong password!')
+	return home()
+
+@app.route('/otvori')
+def otvaranje():
+	global kapija
+	if kapija == "otvoreno":
+		kapija = "zatvoreno"	
+		pwm.set_pwm(15,0,356)
+		print("otvoreno")
+	else:
+		pwm.set_pwm(15,0,630)
+		print("zatvoreno")
+		kapija = "otvoreno"
+	return render_template("pametnakuca.html")
+		
+
+@app.route('/otvorig')
+def otvaranjeg():
+	global garaza
+	if garaza == "otvoreno":
+		garaza = "zatvoreno"
+		pwm.set_pwm(14,0,356)
+		print("otvoreno")
+	else:
+		pwm.set_pwm(14,0,630)
+		print("zatvoreno")
+		garaza = "otvoreno"
+
+	return render_template("pametnakuca.html")
+		
+@app.route('/led1on')
+def led1u():
+	global prvi
+	if prvi == "ugaseno":
+		GPIO.output(led1,GPIO.HIGH)
+		prvi = "upaljeno"
+		lcd.set_cursor(0,0)
+		lcd.message('L1:ON     ')
+	else:
+		GPIO.output(led1,GPIO.LOW)
+		prvi="ugaseno"
+		lcd.set_cursor(0,0)
+		lcd.message('L1:OFF    ')
+	return render_template("pametnakuca.html")
+
+@app.route('/led2on')
+def led2u():
+	global drugi
+	if drugi == "ugaseno":
+		GPIO.output(led2,GPIO.HIGH)
+		lcd.set_cursor(10,0)
+		lcd.message('L2:ON \n')
+		drugi = "upaljeno"
+	else:
+		GPIO.output(led2,GPIO.LOW)
+		lcd.set_cursor(10,0)
+		lcd.message('L2:OFF\n')
+		drugi = "ugaseno"
+	return render_template("pametnakuca.html")
+
+@app.route('/led3on')
+def led3u():
+	global treci
+	if treci == "ugaseno":
+		treci = "upaljeno"
+		GPIO.output(led3,GPIO.HIGH)
+		lcd.set_cursor(0,1)
+		lcd.message('L3:ON     ')
+	else:
+		treci = "ugaseno"
+		GPIO.output(led3,GPIO.LOW)
+		lcd.set_cursor(0,1)
+		lcd.message('L3:OFF')
+	return render_template("pametnakuca.html")
+		
+@app.route('/led4on')
+def led4u():
+	global treci
+	if treci == "ugaseno":
+		treci = "upaljeno"
+		GPIO.output(led4,GPIO.HIGH)
+		lcd.set_cursor(10,1)
+		lcd.message('L4:ON ')
+	else:
+		treci = "ugaseno"
+		GPIO.output(led4,GPIO.LOW)
+		lcd.set_cursor(10,1)
+		lcd.message('L4:OFF')
+
+	return render_template("pametnakuca.html")
+
+if __name__ == "__main__":
+  app.secret_key = os.urandom(12)
+  app.run(debug=True,host='0.0.0.0', port=5000)

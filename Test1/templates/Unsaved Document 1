@@ -1,0 +1,9 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/otvori">
+<input type="button" text="Otvori">  
+</form>
+</body>
+</html>
